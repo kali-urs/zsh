@@ -525,7 +525,7 @@ tmoe_zsh_main_menu() {
 	press_enter_to_return
 	tmoe_zsh_main_menu
 }
-######################
+#######################
 check_tmoe_zsh_plugin_script() {
 	if [ ! -e "${TMOE_ZSH_TOOL_DIR}/environment" ]; then
 		printf "%s\n" "检测到TMOE配置插件不存在，您需要克隆本项目才能继续使用。"
