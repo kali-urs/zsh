@@ -1,8 +1,8 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]] {
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+if [[ -r "${XDG_CACHE_HOME:/zsh/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]] {
+    source "${XDG_CACHE_HOME:/zsh/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 }
 ########
 # Note
@@ -10,13 +10,13 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 
 ########
 # Set env
-path=(~/.local/bin $path)
-typeset -x XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+path=(/zsh/.local/bin $path)
+typeset -x XDG_CONFIG_HOME="${XDG_CONFIG_HOME:/zsh/.config}"
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-TMOE_ZSH_DIR="${HOME}/.config/tmoe-zsh"
+TMOE_ZSH_DIR="/zsh/.config/tmoe-zsh"
 TMOE_ZSH_GIT_DIR="${TMOE_ZSH_DIR}/git"
 TMOE_ZSH_TOOL_DIR="${TMOE_ZSH_GIT_DIR}/tools"
-ZINIT_THEME_DIR="${HOME}/.zinit/themes/_local"
+ZINIT_THEME_DIR="/zsh/.zinit/themes/_local"
 ########
 # Setopt
 setopt correct
@@ -26,11 +26,11 @@ setopt interactive_comments
 ########
 load_omz_lib() {
     for i (theme-and-appearance.zsh git.zsh prompt_info_functions.zsh history.zsh) {
-        zinit snippet ${HOME}/.zinit/omz/lib/${i}
+        zinit snippet /zsh/.zinit/omz/lib/${i}
     }
     for i (completion.zsh key-bindings.zsh) {
         zinit ice lucid wait="1"
-        zinit snippet ${HOME}/.zinit/omz/lib/${i}
+        zinit snippet /zsh/.zinit/omz/lib/${i}
     }
 }
 ########
@@ -43,7 +43,7 @@ load_zinit_compinit_function() {
 }
 ########
 # LOAD MAIN LIB
-source ${HOME}/.zinit/bin/zinit.zsh
+source /zsh/.zinit/bin/zinit.zsh
 load_omz_lib
 ########
 # THEME
@@ -56,7 +56,7 @@ ALOXAF_FZF_TAB_EXTRA=01
 # 当变量ALOXAF_FZF_TAB_EXTRA的值为01时，仅加载补全项颜色函数;为02时，加载右侧窗口配置;为true时，启用所有额外函数;为false时禁用。
 source ${TMOE_ZSH_GIT_DIR}/config/aloxaf_fzf_tab_extra_opts.zsh
 ########
-zinit ice lucid wait="1" pick"extract.plugin.zsh" && zinit light _local/extract && zinit ice lucid as"completion" wait="1" && zinit snippet ${HOME}/.zinit/plugins/_local---extract/_extract #解压插件，输x 压缩包名称（例如`x 233.7z`或`x 233.tar.xz`) 即可解压文件。This plugin defines a function called `extract` that extracts the archive file you pass it, and it supports a wide variety of archive filetypes.
+zinit ice lucid wait="1" pick"extract.plugin.zsh" && zinit light _local/extract && zinit ice lucid as"completion" wait="1" && zinit snippet /zsh/.zinit/plugins/_local---extract/_extract #解压插件，输x 压缩包名称（例如`x 233.7z`或`x 233.tar.xz`) 即可解压文件。This plugin defines a function called `extract` that extracts the archive file you pass it, and it supports a wide variety of archive filetypes.
 ########
 zinit ice lucid wait="1" pick"z.plugin.zsh" && zinit light _local/z && unsetopt BG_NICE #记录访问目录，输z获取,输`z 目录名称`快速跳转  This plugin defines the [z command](https://github.com/rupa/z) that tracks your most visited directories and allows you to access them with very few keystrokes.
 ########
@@ -73,7 +73,7 @@ zinit ice wait lucid pick"zsh-autosuggestions.zsh" atload'_zsh_autosuggest_start
 zinit ice lucid wait="2" pick"sudo.plugin.zsh" && zinit light _local/sudo #Easily prefix your current or previous commands with `sudo` by pressing <kbd>esc</kbd> twice 按两次ESC键,可以在当前命令前加上sudo前缀  
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh # powerlevel10k的prompt
+[[ ! -f /zsh/.p10k.zsh ]] || source /zsh/.p10k.zsh # powerlevel10k的prompt
 #######
 # ALIASES
 alias ...=../..
